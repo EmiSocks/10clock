@@ -16,10 +16,26 @@ class Clock {
 		if (this.type == 1) {
 			angleSec = angleSec + PI/2;
 		}
-		stroke(255);
 		let sqrRadius = radius*sqrt(2);
+		stroke(255);
 		line(this.x, this.y, this.x + sqrRadius*cos(angleSec), this.y + sqrRadius*sin(angleSec));
-		stroke(255, 0, 0);
+		let r;
+		let g;
+		let b;
+		if (minute() < 20) {
+			r = map(minute(), 0, 20, 0, 255);
+			g = map(minute(), 0, 20, 255, 0);
+			b = 0;
+		} else if (minute() >= 20 && minute() < 40) {
+			r = map(minute(), 20, 40, 255, 0);
+			g = 0;
+			b = map(minute(), 20, 40, 0, 255);
+		} else if (minute() >= 40) {
+			r = 0;
+			g = map(minute(), 40, 60, 0, 255);
+			b = map(minute(), 40, 60, 255, 0);
+		}
+		stroke(r, g, b);
 		line(this.x, this.y, this.x - sqrRadius*cos(angleSec), this.y - sqrRadius*sin(angleSec));
 	}
 }
