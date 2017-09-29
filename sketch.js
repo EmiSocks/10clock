@@ -19,7 +19,7 @@ class Clock {
 		}
 		let sqrRadius = radius*sqrt(2);
 		stroke(255);
-		line(this.x, this.y, this.x + sqrRadius*cos(angleSec), this.y + sqrRadius*sin(angleSec));
+		line(this.x, this.y, constrain(this.x + sqrRadius*cos(angleSec), this.x-radius, this.x+radius), constrain(this.y + sqrRadius*sin(angleSec), this.y-radius, this.y+radius));
 		let r;
 		let g;
 		let b;
@@ -37,7 +37,7 @@ class Clock {
 			b = map(minute(), 40, 60, 255, 0);
 		}
 		stroke(r, g, b);
-		line(this.x, this.y, this.x - sqrRadius*cos(angleSec), this.y - sqrRadius*sin(angleSec));
+		line(this.x, this.y, constrain(this.x - sqrRadius*cos(angleSec), this.x-radius, this.x+radius), constrain(this.y - sqrRadius*sin(angleSec), this.y-radius, this.y+radius));
 	}
 }
 
