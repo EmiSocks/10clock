@@ -2,7 +2,8 @@ let diameter = 10;
 let radius = diameter/2;
 let clocks = [];
 let width = 400;
-let height = 400;
+let height = 300;
+let currentHour;
 
 class Clock {
 	constructor(x, y, type) {
@@ -40,19 +41,38 @@ class Clock {
 	}
 }
 
-let clock;
-
 function setup() {
 	createCanvas(width,height);
 	angleMode(RADIANS);
-	for (i=0; i<width/diameter; i++) {
-		for (j=0; j<height/diameter; j++) {
-			clocks.push(new Clock(i*diameter + diameter/2, j*diameter + diameter/2, round(random())));
+	textAlign(CENTER, CENTER);
+}
+
+function hourChanged() {
+	currentHour = hour();
+	clocks = [];
+	
+	background(0);
+	noStroke();
+	fill(255);
+	
+	textSize(width/1.5);
+	text(currentHour, width/2, height/2);
+	
+	for (x=0; x<width; x+=diameter) {
+		for (y=0; y<height; y+=diameter) {
+			if (get(x,y)[0] == 0) {
+				clocks.push(new Clock(x + diameter/2, y + diameter/2, round(random())));
+			}
 		}
 	}
+	
+	
 }
 
 function draw() {
+	
+	if (currentHour != hour()) hourChanged();
+	
 	background(0);
 	
 	let hours = hour();
@@ -62,4 +82,5 @@ function draw() {
 	clocks.forEach(function(clock) {
 		clock.draw();
 	});
+	
 }
