@@ -1,4 +1,4 @@
-let diameter = 20;
+let diameter = 10;
 let radius = diameter/2;
 let clocks = [];
 let width = 400;
